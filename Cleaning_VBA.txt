@@ -1,0 +1,103 @@
+---> Recorded Macro <---
+
+Option Explicit
+Sub cleaning()
+
+Dim StartTime As Double
+Dim EndTime As Double
+'zmienna zapisuje czas rozpoczecia dzialania makra
+StartTime = Timer
+
+
+' cleaning Macro
+
+    Range("B5,B7,B9,B11").Select
+    Range("B11").Activate
+    Selection.ClearContents
+    Range("A15:F15").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    Selection.ClearContents
+    Selection.Borders(xlDiagonalDown).LineStyle = xlNone
+    Selection.Borders(xlDiagonalUp).LineStyle = xlNone
+    With Selection.Borders(xlEdgeLeft)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlEdgeTop)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlEdgeBottom)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlEdgeRight)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlInsideVertical)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlInsideHorizontal)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    Range("B5").Select
+    
+'zmienna sprawdzajaca czas zakonczenia dzialania makra
+EndTime = Round(Timer - StartTime, 2)
+
+'Wyswietla wynik w oknie
+Range("D7").Value = "Czas wykonywania kodu: " & EndTime & " sekund"
+    
+End Sub
+
+
+---> Refactored Code <---
+
+Option Explicit
+
+Sub better_clean()
+
+Dim StartTime As Double
+Dim EndTime As Double
+'zmienna zapisuje czas rozpoczecia dzialania makra
+StartTime = Timer
+
+    'czyszcze komorki B5, B7, B9
+    
+    Range("B5,B7,B9,B11").Select
+    Selection.ClearContents
+    
+    'czyszczenie tabeli ostatniego wiersza
+    
+    Range("15:15").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    Selection.ClearContents
+
+    'poprawienie obramowania komorek w tabeli
+    
+    Selection.Borders.LineStyle = xlContinuous
+    Range("B7").Select
+    
+    
+'zmienna sprawdzajaca czas zakonczenia dzialania makra
+EndTime = Round(Timer - StartTime, 2)
+
+'Wyswietla wynik w oknie
+Range("D7").Value = "Czas wykonywania kodu: " & EndTime & " sekund"
+
+End Sub
